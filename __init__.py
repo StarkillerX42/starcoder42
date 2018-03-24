@@ -38,11 +38,12 @@ masses = {"Protons": 1.67262e-27,
           "Jupiters": 1.89813e27,
           "Dylans": 70  # approximately
           }
-massesAMU = {"tCO2Spec": 44,
+massesAMU = {"CO2": 44,
              "MOxygen": 32,
              "MHydrogen": 2,
              "MNitrogen": 28,
              "Water": 18,
+             "H2O": 18,
              "Methane": 16,
              "SulfurDioxide": 64,
              "MArgon": 40
