@@ -1,6 +1,8 @@
+import numpy as np
 import sympy as sp
 import sympy.abc
-
+import sympy.matrices
+sp.init_printing()
 
 def sec(x, **kwargs):
     """returns the secant of the angle x"""
@@ -10,7 +12,7 @@ def sec(x, **kwargs):
 def grad(f, variables):
     """Returns the gradient of a vector field f wrt. variables
     :param f: ND function
-    :param varaibles: (tuple,list) sympy symbols representing dimensions
+    :param variables: (tuple,list) sympy symbols representing dimensions
     :return: ND gradient field
     """
 
@@ -47,11 +49,11 @@ def curl(f, variables):
     curls = [+f[2].diff(variables[1]) - f[1].diff(variables[2]),
              -f[2].diff(variables[0]) + f[0].diff(variables[2]),
              +f[1].diff(variables[0]) - f[0].diff(variables[1])]
-    curArr = sp.Array(curls)
-    return curArr
+    crl = sp.Array(curls)
+    return crl
 
 
-def forwardDerivative(f, x, dh):
+def forward_derivative(f, x, dh):
     """
     Use the forward difference method to calculate the
     derivative of a function "f", evaluated at "x",
@@ -68,7 +70,7 @@ def forwardDerivative(f, x, dh):
     return (f(x + dh) - f(x)) / dh
 
 
-def centerDerivative(f, x, dh):
+def center_derivative(f, x, dh):
     """
     Use the central difference method to calculate the
     derivative of a function "f", evaluated at "x",
@@ -85,19 +87,31 @@ def centerDerivative(f, x, dh):
     return (f(x + dh) - f(x - dh)) / dh / 2.
 
 
-def eFoldingTime(timesArr, valArr):
+def efoldingtime(times, values):
     """Assuming the array begins at an inital value, and converges before the end,
     this function finds the e-folding time of the array
     Inputs:
-    timesArr: (array) An array of times
-    valArr: (array) An Array of values corresponding to the times in timesArr
+    times: (array) An array of times
+    values: (array) An Array of values corresponding to the times in times
     Return:
     The amount of time it takes for this function to fold by e. This will return
-    the first time where this occurs, and will only work if the values of valArr
+    the first time where this occurs, and will only work if the values of values
     decay quasi-exponentially or exponentially."""
-    assert len(timesArr)==len(valArr)
-    totalChange = np.abs(valArr[0] - valArr[-1])
-    eFold = totalChange/np.e
-    boolArr = np.abs(valArr-valArr[-1]) < eFold
-    eFoldt = timesArr[boolArr][0]
-    return eFoldt
+    assert len(times) == len(values)
+    total_change = np.abs(values[0] - values[-1])
+    fold = total_change/np.e
+    boolean = np.abs(values - values[-1]) < fold
+    fold_time = times[boolean][0]
+    return fold_time
+
+
+def jacobian(functions, variables):
+    mat = []
+    for f in functions:
+        dim = []
+        for v in variables:
+            dim.append(f.diff(v))
+        mat.append(dim)
+    mat = sp.Matrix(mat)
+    jac = mat.det()
+    return jac.simplify()
