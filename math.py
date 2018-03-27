@@ -4,6 +4,7 @@ import sympy.abc
 import sympy.matrices
 
 sp.init_printing()
+r = sp.Rational
 
 
 def sec(x, **kwargs):
@@ -89,8 +90,8 @@ def center_derivative(f, x, dh):
 
 
 def efoldingtime(times, values):
-    """Assuming the array begins at an inital value, and converges before the end,
-    this function finds the e-folding time of the array
+    """Assuming the array begins at an inital value, and converges before the
+    end, this function finds the e-folding time of the array
     Inputs:
     times: (array) An array of times
     values: (array) An Array of values corresponding to the times in times

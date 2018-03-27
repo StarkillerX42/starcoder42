@@ -1,6 +1,12 @@
 """This is my own code library. It has many cool functions using the numpy and
-sympy libraries. Everything tries to be in camelCase, but dictionary keys are
-still in CapitalCase.
+sympy libraries. Everything tries to be in snake_case, but dictionary keys are
+still in CapitalCase. For more extensions on this involving sympy, try
+starcoder42.math. It's recommended you import this via
+import starcoder42 as sc
+import starcoder42.math
+Some notable benefits of this is it automatically imports the function reload
+available as sc.reload. It also only imports sympy if you import
+starcoder42.math which helps optimize code if sympy isn't in use.
 
 Sections:
 1. Constants
