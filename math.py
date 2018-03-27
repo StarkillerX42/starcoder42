@@ -2,7 +2,9 @@ import numpy as np
 import sympy as sp
 import sympy.abc
 import sympy.matrices
+
 sp.init_printing()
+
 
 def sec(x, **kwargs):
     """returns the secant of the angle x"""
@@ -43,8 +45,7 @@ def curl(f, variables):
     :param f: 3D function
     :param variables: (tuple,list) sympy symbols representing dimensions
     :return: 3D curl field"""
-    assert len(f) == len(variables) == 3, "Function and variables dimension " \
-                                          "be 3"
+    assert len(f) == len(variables) == 3, "curl only exists in 3D space"
 
     curls = [+f[2].diff(variables[1]) - f[1].diff(variables[2]),
              -f[2].diff(variables[0]) + f[0].diff(variables[2]),
@@ -99,13 +100,20 @@ def efoldingtime(times, values):
     decay quasi-exponentially or exponentially."""
     assert len(times) == len(values)
     total_change = np.abs(values[0] - values[-1])
-    fold = total_change/np.e
+    fold = total_change / np.e
     boolean = np.abs(values - values[-1]) < fold
     fold_time = times[boolean][0]
     return fold_time
 
 
 def jacobian(functions, variables):
+    """Calculates the jacobian of a sympy function, given sympy variables
+    Inputs:
+    functions: (array) Continuous functions of ND
+    variables: (array) Variables of the functions
+
+    Returns:
+    The jacobian of a function, regardless of dimension    """
     mat = []
     for f in functions:
         dim = []
@@ -115,3 +123,16 @@ def jacobian(functions, variables):
     mat = sp.Matrix(mat)
     jac = mat.det()
     return jac.simplify()
+
+
+def mag(a):
+    """Computes the symbolic magnitude of a function. Unlike sc.mag, this
+    function should be used in the conjunction of sympy and symbols
+
+    :param a: (array or list) The list to be calculated for magnitude.
+    1D, any length
+    :return: Magnitude of a
+    """
+    a = np.array(a)
+    magnitude = sp.sqrt(np.sum(a ** 2))
+    return magnitude
