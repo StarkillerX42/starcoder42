@@ -33,6 +33,7 @@ c = 2.99792e8  # m/s
 sigma = 5.6704e-8  # W/m^2/K^4
 hbar = 1.05457e-34  # J*s
 k = 8.98755e9  # Nm^2/C^2
+tau = 2 * np.pi
 
 # 2. Conversion factors
 # Masses

@@ -5,6 +5,7 @@ import sympy.matrices
 
 sp.init_printing()
 r = sp.Rational
+stau = 2 * sp.pi
 
 
 def sec(x, **kwargs):
