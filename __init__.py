@@ -62,6 +62,11 @@ charges = {"Electron": -1.60218e-19,  # C
            "Proton": 1.60218e-19  # C
            }
 
+heat_capacities = {"H2O": 4184,
+                   "Si": 712}
+
+densities = {"H2O": 1000,
+             "Si": 2650}
 # Distances
 distances = {"AstronomicalUnits": 1.49598e11,
              "LightYears": 9.46e15,

@@ -5,23 +5,24 @@ import sympy.matrices
 
 sp.init_printing()
 r = sp.Rational
-stau = 2 * sp.pi
-
+tau = 2 * sp.pi
+cartesian = sp.symbols("x, y, z")
 
 def sec(x, **kwargs):
     """returns the secant of the angle x"""
     return 1 / np.cos(x, **kwargs)
 
 
-def grad(f, variables):
-    """Returns the gradient of a vector field f wrt. variables
+def grad(f, space):
+    """Returns the gradient of a vector field f given space defined as an
+    array of sympy variables
     :param f: ND function
-    :param variables: (tuple,list) sympy symbols representing dimensions
+    :param space: (tuple,list) sympy symbols representing dimensions
     :return: ND gradient field
     """
 
     flist = []
-    for i, var in enumerate(variables):
+    for i, var in enumerate(space):
         try:
             flist.append(f[i].diff(var))
         except (IndexError, TypeError):
@@ -29,31 +30,49 @@ def grad(f, variables):
     return sp.Array(flist)
 
 
-def div(f, variables):
-    """Returns the divergence of a vector field f wrt. variables
-
+def div(f, space):
+    """Returns the divergence of a vector field f given space defined as an
+    array of sympy variables
     :param f: ND function
-    :param variables: sympy symbols representing dimensions
+    :param space: sympy symbols representing dimensions
     :return: divergence scalar"""
-    assert len(f) == len(variables), "Function and Variables Dimension must " \
-                                     "be equal"
+    assert len(f) == len(space), "Function and Variables Dimension must " \
+                                 "be equal"
 
-    flist = [fi.diff(v) for fi, v in zip(f, variables)]
+    flist = [fi.diff(v) for fi, v in zip(f, space)]
     return sum(flist)
 
 
-def curl(f, variables):
-    """Returns the curl of a vector field f wrt. variables
+def curl(f, space):
+    """Returns the curl of a vector field f given space defined as an
+    array of sympy variables
     :param f: 3D function
-    :param variables: (tuple,list) sympy symbols representing dimensions
+    :param space: (tuple,list) sympy symbols representing dimensions
     :return: 3D curl field"""
-    assert len(f) == len(variables) == 3, "curl only exists in 3D space"
+    assert len(f) == len(space) == 3, "curl only exists in 3D space"
 
-    curls = [+f[2].diff(variables[1]) - f[1].diff(variables[2]),
-             -f[2].diff(variables[0]) + f[0].diff(variables[2]),
-             +f[1].diff(variables[0]) - f[0].diff(variables[1])]
+    curls = [+f[2].diff(space[1]) - f[1].diff(space[2]),
+             -f[2].diff(space[0]) + f[0].diff(space[2]),
+             +f[1].diff(space[0]) - f[0].diff(space[1])]
     crl = sp.Array(curls)
     return crl
+
+
+def laplacian(f, space):
+    """Computes the laplacian of a vector function f given space defined as an
+    array of sympy variables
+    :param f: ND function or potential function
+    :param space: ND array, tuple, function of sympy symbols defining the space
+    :return: A sympy Mul object or possibly float
+    """
+    lap = 0
+    try:
+        for fd, var in zip(f, space):  # If it's a vector field
+            lap += fd.diff(var)
+    except (IndexError, AttributeError):  # If it's a scalar field
+        for i, var in enumerate(space):
+            lap += f.diff(var)
+    return lap
 
 
 def forward_derivative(f, x, dh):
@@ -108,18 +127,19 @@ def efoldingtime(times, values):
     return fold_time
 
 
-def jacobian(functions, variables):
-    """Calculates the jacobian of a sympy function, given sympy variables
+def jacobian(functions, space):
+    """Calculates the jacobian of a sympy function, given space defined as an
+    array of sympy variables
     Inputs:
     functions: (array) Continuous functions of ND
-    variables: (array) Variables of the functions
+    space: (array) Variables of the functions
 
     Returns:
     The jacobian of a function, regardless of dimension    """
     mat = []
     for f in functions:
         dim = []
-        for v in variables:
+        for v in space:
             dim.append(f.diff(v))
         mat.append(dim)
     mat = sp.Matrix(mat)
