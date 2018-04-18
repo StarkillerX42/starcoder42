@@ -19,7 +19,10 @@ Sections:
 
 """
 import numpy as np
-from importlib import reload
+import sys
+
+if sys.version_info.major == 3:
+    from importlib import reload
 
 __version__ = 3.6
 __author__ = "Dylan Gatlin"
@@ -34,6 +37,7 @@ sigma = 5.6704e-8  # W/m^2/K^4
 hbar = 1.05457e-34  # J*s
 k = 8.98755e9  # Nm^2/C^2
 tau = 2 * np.pi
+kb = 1.380648e-23
 
 # 2. Conversion factors
 # Masses
@@ -69,6 +73,7 @@ densities = {"H2O": 1000,
              "Si": 2650}
 # Distances
 distances = {"AstronomicalUnits": 1.49598e11,
+             "AU": 1.49598e11,
              "LightYears": 9.46e15,
              "Parsecs": 3.08568e16,
              "Kiloparsecs": 3.08568e19,
@@ -267,10 +272,12 @@ def planck(w, temp=5800):
     Returns:
     brightness: (float) The planck function in units of W/m^3
     """
-    temp = float(temp)
-    w = float(w) * 1e-9
-    brightness = (2 * h * c ** 2) / (
-            w ** 5 * (np.exp(h * c / (w * k * temp)) - 1))
+    assert temp != 0, "Temperature cannot be zero"
+    temp = temp * 1.0
+    w = w * 1e-9
+    num = 2 * h * c ** 2
+    den = w ** 5 * (np.exp(h * c / (w * kb * temp)) - 1)
+    brightness = num / den
     return brightness
 
 
@@ -321,6 +328,7 @@ def estimate_rgb(wavelengths, fluxes):
         will need to renormalize your integrals by the maximum of
         the three values, to ensure this happens.)
     """
+    assert np.all(fluxes >= 0), "Fluxes were not positive"
     re = integrate_spectrum(wavelengths, fluxes, 565, 660)
     gr = integrate_spectrum(wavelengths, fluxes, 485, 570)
     bl = integrate_spectrum(wavelengths, fluxes, 400, 490)
@@ -328,7 +336,10 @@ def estimate_rgb(wavelengths, fluxes):
     rgb = np.array([re, gr, bl])
     # normalize by the maximum value
     biggest = np.max(rgb)
-    rgb = rgb / biggest
+    rgb /= biggest
+    assert all(rgb >= 0), "Something went wrong, rgb produced a negative value"
+    assert all(rgb <= 1), "Something went wrong, rgb produce a value greater " \
+                          "than one "
 
     return rgb
 
@@ -366,46 +377,12 @@ def random_colors(n=1, red=1.0, green=0.5, blue=0.3):
         re = np.random.random() * red + red
         gr = np.random.random() * green + green
         bl = np.random.random() * blue + blue
-        biggest = max([re, gr, bl])
+        biggest = np.max([re, gr, bl])
         re = re / biggest
         gr = gr / biggest
         bl = bl / biggest
         colors.append([re, gr, bl])
     return colors
-
-
-def random_decay_simulation(n, true_half_life):
-    """Gives the time it takes for a set of N particles to decay. This is a
-    simulation code, so its output will be extremel variable, espeically when
-    N is small. Run this simulation many times to establish a reliable expected
-    value.
-
-    Inputs:
-    N: The number of particles in the simulation
-    true_half_life: Expected halflife of the partcle. In any units of time.
-
-    Returns:
-    The time of which the half of the particles have decayed in this particular
-    simulation. This number will be different every time this is run. Returns
-    the same units as given in input.
-    """
-
-    scale = true_half_life / np.log(2)
-    time_decay = np.random.exponential(scale, n)
-    half_decay = np.percentile(time_decay, 50)
-    return half_decay
-
-
-def temp2rgb(t=5800):
-    """Given a temperature, this function creates an RGB color, this is usually
-    more useful than wavelength_to_rgb.
-
-    Inputs:
-    T: (int/float), defaults to 5800, blackbody temperature"""
-    w = np.linspace(300, 800, 500)
-    b = planck(w, t)
-    color = estimate_rgb(w, b)
-    return color
 
 
 def wavelength_to_rgb(wavelength, gamma=1.0):
@@ -451,6 +428,47 @@ def wavelength_to_rgb(wavelength, gamma=1.0):
     return [int(re), int(gr), int(bl)]
 
 
+def blackbody_color(temp=5800):
+    """Returns the color of a blackbody of temperature t
+    :param temp: A temperature in Kelvin or array of temperatures in kelvin
+    :return: An array of shape len(temp)x3 of rgb colors"""
+    wavelengths = np.linspace(400, 700, 250)
+    if isinstance(temp, (float, int)):
+        fluxes = planck(wavelengths, temp=temp)
+        color = estimate_rgb(wavelengths, fluxes)
+    elif isinstance(temp, (list, np.ndarray)):
+        color = []
+        for i, t in enumerate(temp):
+            fluxes = planck(wavelengths, temp=t)
+            color.append(estimate_rgb(wavelengths, fluxes))
+        color = np.array(color)
+    else:
+        raise TypeError("Inputs must be given as an int, float, list, or array")
+    return color
+
+
+def random_decay_simulation(n, true_half_life):
+    """Gives the time it takes for a set of N particles to decay. This is a
+    simulation code, so its output will be extremel variable, espeically when
+    N is small. Run this simulation many times to establish a reliable expected
+    value.
+
+    Inputs:
+    N: The number of particles in the simulation
+    true_half_life: Expected halflife of the partcle. In any units of time.
+
+    Returns:
+    The time of which the half of the particles have decayed in this particular
+    simulation. This number will be different every time this is run. Returns
+    the same units as given in input.
+    """
+
+    scale = true_half_life / np.log(2)
+    time_decay = np.random.exponential(scale, n)
+    half_decay = np.percentile(time_decay, 50)
+    return half_decay
+
+
 def findindex(array, val, print_it=False):
     bool_arr = array < val
     ind = np.where(bool_arr)[0][0]
@@ -466,8 +484,6 @@ def describe(a, print_it=False):
     print("Size is {}".format(a.size))
     print("Shape is {}".format(a.shape))
     print("Number of dimensions is {}".format(a.ndim))
-    if print_it:
-        print("Contents are...\n{}".format(a))
     try:
         print("Maximum value is {}".format(a.max()))
         print("Minimum value is {}".format(a.min()))
@@ -475,6 +491,8 @@ def describe(a, print_it=False):
         print("Standard Deviation is {}".format(a.std()))
     except AttributeError:
         print("Array contains values which are not ints or floats")
+    if print_it:
+        print("Contents are...\n{}".format(a))
 
 
 print("All set up!")

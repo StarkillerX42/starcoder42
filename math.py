@@ -3,10 +3,11 @@ import sympy as sp
 import sympy.abc
 import sympy.matrices
 
-sp.init_printing()
 r = sp.Rational
 tau = 2 * sp.pi
 cartesian = sp.symbols("x, y, z")
+cylindrical = (sp.symbols("r"), sp.abc.phi, sp.symbols("z"))
+spherical = (sp.symbols("r"), sp.abc.phi, sp.abc.theta)
 
 def sec(x, **kwargs):
     """returns the secant of the angle x"""
