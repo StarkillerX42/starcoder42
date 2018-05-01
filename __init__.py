@@ -38,6 +38,7 @@ hbar = 1.05457e-34  # J*s
 k = 8.98755e9  # Nm^2/C^2
 tau = 2 * np.pi
 kb = 1.380648e-23
+alphabet = "ABCDEFHGIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789 !?"
 
 # 2. Conversion factors
 # Masses
