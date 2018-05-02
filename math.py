@@ -38,8 +38,8 @@ def div(f, space):
     :param f: ND function
     :param space: sympy symbols representing dimensions
     :return: divergence scalar"""
-    assert len(f) == len(space), "Function and Variables Dimension must " \
-                                 "be equal"
+    assert len(f) == len(space), "Function and Variables Dimension must be " \
+                                 "equal "
 
     flist = [fi.diff(v) for fi, v in zip(f, space)]
     return sum(flist)
