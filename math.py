@@ -9,6 +9,7 @@ cartesian = sp.symbols("x, y, z")
 cylindrical = (sp.symbols("r"), sp.abc.phi, sp.symbols("z"))
 spherical = (sp.symbols("r"), sp.abc.phi, sp.abc.theta)
 
+
 def sec(x, **kwargs):
     """returns the secant of the angle x"""
     return 1 / np.cos(x, **kwargs)
