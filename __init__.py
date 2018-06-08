@@ -60,18 +60,18 @@ massesAMU = {"CO2": 44,
              "SulfurDioxide": 64,
              "MArgon": 40
              }
-avrogadro = 6.02 * 10 ** 23
+avrogadro = 6.02e23
 
 # Charges
 charges = {"Electron": -1.60218e-19,  # C
            "Proton": 1.60218e-19  # C
            }
 
-heat_capacities = {"H2O": 4184,
-                   "Si": 712}
+heat_capacities = {"H2O": 4184.,
+                   "Si": 712.}
 
-densities = {"H2O": 1000,
-             "Si": 2650}
+densities = {"H2O": 1000.,
+             "Si": 2650.}
 # Distances
 distances = {"AstronomicalUnits": 1.49598e11,
              "AU": 1.49598e11,
@@ -80,36 +80,36 @@ distances = {"AstronomicalUnits": 1.49598e11,
              "Kiloparsecs": 3.08568e19,
              "Megaparsecs": 3.08568e22,
              "Kilometers": 1000,
-             "Nanometers": 10 ** -9,
-             "Microns": 10 ^ -6,
-             "Angstroms": 10 ** -10,
+             "Nanometers": 1.e-9,
+             "Microns": 1.e-6,
+             "Angstroms": 1.e-10,
              "EarthRadii": 6.37101e6,
              "StellarRadii": 6.95700e8,
              "MoonRadii": 1.7375e6
              }
 
-times = {"Minutes": 60,
-         "Hours": 3600,
-         "Days": 86400,
-         "Weeks": 604800,
+times = {"Minutes": 60.,
+         "Hours": 3600.,
+         "Days": 86400.,
+         "Weeks": 604800.,
          "Years": 3.1536e7
          }
 
-CGS = {"Gauss": 10 ** -4,  # Teslas
-       "Ergs": 10 ** -7  # Joules
+CGS = {"Gauss": 1.e-4,  # Teslas
+       "Ergs": 1.e-7  # Joules
        }
 
 evtoj = 1.60218e-19
 
 # Angles
-deg2as = 3600
-deg2am = 60
+deg2as = 3600.
+deg2am = 60.
 deg2rad = np.pi / 180
-rad2as = 206265
+rad2as = 206265.
 
 # Absract Values
 g = 9.807  # m/s^2
-vesc = 11180  # m/s
+vesc = 11180.  # m/s
 
 
 # 3. Unit Conversion Functions
@@ -470,7 +470,7 @@ def random_decay_simulation(n, true_half_life):
     return half_decay
 
 
-def findindex(array, val, print_it=False):
+def find_index(array, val, print_it=False):
     bool_arr = array < val
     ind = np.where(bool_arr)[0][0]
     if print_it:
