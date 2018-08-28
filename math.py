@@ -162,7 +162,7 @@ def mag(a):
     return magnitude
 
 
-def greatest_common_denomenator(a, b):
+def find_gcd(a, b):
     """Uses Euclid's Algorithm to find the greatest common denomenator between
     two numbers, a and b."""
     assert(isinstance(a, int))
@@ -174,8 +174,8 @@ def greatest_common_denomenator(a, b):
 
 def find_mod_inverse(a, b):
     """Solves a%c=b, returning c"""
-    if greatest_common_denomenator(a, b) != 1:
-        return None
+    assert find_gcd(a, b) != 1, "a and b do not have a mod inverse and are " \
+                                "not relatively prime"
     u1, u2, u3 = 1, 0, a
     v1, v2, v3 = 0, 1, b
     while v3 != 0:
