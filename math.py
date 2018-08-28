@@ -111,7 +111,7 @@ def center_derivative(f, x, dh):
     return (f(x + dh) - f(x - dh)) / dh / 2.
 
 
-def efoldingtime(times, values):
+def e_folding_time(times, values):
     """Assuming the array begins at an inital value, and converges before the
     end, this function finds the e-folding time of the array
     Inputs:
@@ -160,3 +160,25 @@ def mag(a):
     a = np.array(a)
     magnitude = sp.sqrt(np.sum(a ** 2))
     return magnitude
+
+
+def greatest_common_denomenator(a, b):
+    """Uses Euclid's Algorithm to find the greatest common denomenator between
+    two numbers, a and b."""
+    assert(isinstance(a, int))
+    assert(isinstance(b, int))
+    while a != 0:
+        a, b = b % a, a
+    return b
+
+
+def find_mod_inverse(a, b):
+    """Solves a%c=b, returning c"""
+    if greatest_common_denomenator(a, b) != 1:
+        return None
+    u1, u2, u3 = 1, 0, a
+    v1, v2, v3 = 0, 1, b
+    while v3 != 0:
+        q = u3 // v3
+        v1, v2, v3, u1, u2, u3 = u1-q*v1, u2-q*v2, u3-q*v3, v1, v2, v3
+    return u1 % b
