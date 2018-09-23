@@ -502,6 +502,4 @@ def iprint(x, scope: int=1, **kwargs):
     """
     print("", x, sep="    "*scope)
 
-def
-
 print("All set up!")
