@@ -2,10 +2,10 @@
 sympy libraries. Everything tries to be in snake_case, but dictionary keys are
 still in CapitalCase. For more extensions on this involving sympy, try
 starcoder42.math. It's recommended you import this via
-import starcoder42 as sc
+import starcoder42 as s
 import starcoder42.math
 Some notable benefits of this is it automatically imports the function reload
-available as sc.reload. It also only imports sympy if you import
+available as s.reload. It also only imports sympy if you import
 starcoder42.math which helps optimize code if sympy isn't in use.
 
 Sections:
@@ -495,11 +495,15 @@ def describe(a, print_it=False):
     if print_it:
         print("Contents are...\n{}".format(a))
 
-def iprint(x, scope: int=1, **kwargs):
-    """This prints items indented by 4 spaces, to help clarify scope of
-    operations. x is the value intended to be printed, scope is an integer
-    of the number of indents desired.
-    """
-    print("", x, sep="    "*scope)
+
+if sys.version_info.major == 3:
+    # Only for 3 because scope must be an int
+    def iprint(x, scope: int=1, **kwargs):
+        """This prints items indented by 4 spaces, to help clarify scope of
+        operations. x is the value intended to be printed, scope is an integer
+        of the number of indents desired.
+        """
+        print("", x, sep="    "*scope, **kwargs)
+
 
 print("All set up!")
