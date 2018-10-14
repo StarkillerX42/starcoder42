@@ -504,6 +504,3 @@ if sys.version_info.major == 3:
         of the number of indents desired.
         """
         print("", x, sep="    "*scope, **kwargs)
-
-
-print("All set up!")
