@@ -1,7 +1,7 @@
 import numpy as np
 import sympy as sp
 import sympy.abc
-import sympy.matrices
+sp.init_printing()
 
 r = sp.Rational
 tau = 2 * sp.pi
