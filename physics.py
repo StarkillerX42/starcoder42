@@ -1,8 +1,7 @@
 """Functions that have physical meaning"""
 
 # Local imports
-from funcpy import mag, unit
-from constants import *
+from .constants import *
 
 
 def force_gravity_mag(m1, m2, r):
@@ -187,3 +186,25 @@ def lorentz(v):
 
     assert (np.abs(v) < 1)
     return 1 / np.sqrt(1 - v ** 2)
+
+
+def mag(a):
+    """This is a simple function to find the magnitude of any vector.
+
+    :param a: (array or list) The list to be calculated for magnitude.
+    1D, any length
+    :return: Magnitude of a
+    """
+    a = np.array(a)
+    magnitude = np.sqrt(np.sum(a**2))
+    return magnitude
+
+
+def unit(a):
+    """This is a function dependent on mag(a) to create a unit Vector.
+    :param a: (array) The input to be converted to a unit vector.
+    1D, any length
+    :return: A unit vector for a
+    """
+    unit_vector = a / mag(a)
+    return unit_vector

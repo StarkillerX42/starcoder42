@@ -12,7 +12,7 @@ s.find_index: A function that can find the closest corresponding index, even if
     your guess isn't in the array
 s.describe: A function to describe the contents of a multidimensional array
 """
-s
+
 __version__ = 3.6
 __author__ = "Dylan Gatlin"
 
@@ -21,9 +21,11 @@ import sys
 
 if sys.version_info.major == 3:
     from importlib import reload
+sys.path.append('.')
 
 
-from constants import *
-from conversions import *
-from funcpy import *
-from physics import *
+from .constants import *
+from .conversions import *
+from .funcpy import *
+from .physics import *
+from .errors import *

@@ -2,7 +2,7 @@
 
 import sys
 import numpy as np
-from physics import planck, estimate_rgb
+from .physics import planck, estimate_rgb
 
 
 def random_colors(n=1, red=1.0, green=0.5, blue=0.3):
@@ -137,28 +137,6 @@ def describe(a, print_it=False):
         print("Array contains values which are not ints or floats")
     if print_it:
         print("Contents are...\n{}".format(a))
-
-
-def mag(a):
-    """This is a simple function to find the magnitude of any vector.
-
-    :param a: (array or list) The list to be calculated for magnitude.
-    1D, any length
-    :return: Magnitude of a
-    """
-    a = np.array(a)
-    magnitude = np.sqrt(np.sum(a**2))
-    return magnitude
-
-
-def unit(a):
-    """This is a function dependent on mag(a) to create a unit Vector.
-    :param a: (array) The input to be converted to a unit vector.
-    1D, any length
-    :return: A unit vector for a
-    """
-    unit_vector = a / mag(a)
-    return unit_vector
 
 
 if sys.version_info.major == 3:
