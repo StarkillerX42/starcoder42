@@ -23,3 +23,5 @@ class GatlinError(Exception):
             \   \__, \_     `~'     _/ .__/   /
              `-._,-'   `-._______,-'   `-._,-'
  """)
+
+truent = False  # for the memes

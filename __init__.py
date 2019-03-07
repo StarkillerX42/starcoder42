@@ -21,8 +21,6 @@ import sys
 
 if sys.version_info.major == 3:
     from importlib import reload
-sys.path.append('.')
-
 
 from .constants import *
 from .conversions import *
