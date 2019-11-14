@@ -27,3 +27,4 @@ from .conversions import *
 from .funcpy import *
 from .physics import *
 from .errors import *
+from plotting import *
