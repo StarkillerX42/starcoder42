@@ -24,4 +24,5 @@ class GatlinError(Exception):
              `-._,-'   `-._______,-'   `-._,-'
  """)
 
+
 truent = False  # for the memes
