@@ -137,13 +137,4 @@ def describe(a, print_it=False):
         print("Array contains values which are not ints or floats")
     if print_it:
         print("Contents are...\n{}".format(a))
-
-
-if sys.version_info.major == 3:
-    # Only for 3 because scope must be an int
-    def iprint(x, scope: int=1, **kwargs):
-        """This prints items indented by 4 spaces, to help clarify scope of
-        operations. x is the value intended to be printed, scope is an integer
-        of the number of indents desired.
-        """
-        print("", x, sep="    "*scope, **kwargs)
+ 

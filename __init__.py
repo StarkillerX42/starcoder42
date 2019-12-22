@@ -21,9 +21,10 @@ import sys
 
 if sys.version_info.major == 3:
     from importlib import reload
-    from .funcpy import *
+    from .funcpy3 import *
     from .physics import *
 
+from .funcpy import *
 from .constants import *
 from .conversions import *
 from .errors import *
