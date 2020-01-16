@@ -1,8 +1,7 @@
 """A number of functions that don't come from physics or astronomy"""
 
-import sys
 import numpy as np
-from .physics import planck, estimate_rgb
+from starcoder42.physics import planck, estimate_rgb
 
 
 def random_colors(n=1, red=1.0, green=0.5, blue=0.3):
