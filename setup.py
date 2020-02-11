@@ -9,7 +9,7 @@ setup(
     },
     install_requires=[
         'numpy', 'sympy'
-    ]
+    ],
     author='Dylan Gatlin',
     author_email='dgatlin@apo.nmsu.edu',
     description="""This is my own code library. It has many cool functions using

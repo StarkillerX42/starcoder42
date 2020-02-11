@@ -1,7 +1,7 @@
 *.xml
 *.pyc
-__pycache__
+*__pycache__
+.idea
 build
 dist
 Starcoder42.egg-info
-

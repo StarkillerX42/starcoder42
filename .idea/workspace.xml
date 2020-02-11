@@ -2,7 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="97bb0b28-5a79-4f1f-a0a1-bf77c5a6b18a" name="Default" comment="Restructured so that each element isn't inside init">
+      <change afterPath="$PROJECT_DIR$/LICENSE" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gpl.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/setup.py" beforeDir="false" afterPath="$PROJECT_DIR$/setup.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/starcoder42/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/starcoder42/__init__.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -47,6 +52,7 @@
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
@@ -89,6 +95,8 @@
       <workItem from="1558649175517" duration="486000" />
       <workItem from="1558649678365" duration="8000" />
       <workItem from="1576922706086" duration="1044000" />
+      <workItem from="1580090032501" duration="37000" />
+      <workItem from="1581382385368" duration="655000" />
     </task>
     <task id="LOCAL-00001" summary="message">
       <created>1521917673521</created>
@@ -256,9 +264,25 @@
     <option name="LAST_COMMIT_MESSAGE" value="Restructured so that each element isn't inside init" />
   </component>
   <component name="WindowStateProjectService">
+    <state x="778" y="311" width="424" height="482" key="FileChooserDialogImpl" timestamp="1580090066940">
+      <screen x="70" y="27" width="1850" height="1053" />
+    </state>
+    <state x="778" y="311" width="424" height="482" key="FileChooserDialogImpl/70.27.1850.1053@70.27.1850.1053" timestamp="1580090066940" />
+    <state x="590" y="288" width="800" height="531" key="Vcs.Push.Dialog.v2" timestamp="1581383116140">
+      <screen x="70" y="27" width="1850" height="1053" />
+    </state>
+    <state x="590" y="288" width="800" height="531" key="Vcs.Push.Dialog.v2/70.27.1850.1053@70.27.1850.1053" timestamp="1581383116140" />
+    <state x="631" y="381" key="com.intellij.ide.util.TipDialog" timestamp="1581382393886">
+      <screen x="70" y="27" width="1850" height="1053" />
+    </state>
+    <state x="631" y="381" key="com.intellij.ide.util.TipDialog/70.27.1850.1053@70.27.1850.1053" timestamp="1581382393886" />
     <state x="692" y="472" width="526" height="168" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1579165767522">
       <screen x="0" y="34" width="1920" height="1046" />
     </state>
     <state x="692" y="472" width="526" height="168" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.34.1920.1046@0.34.1920.1046" timestamp="1579165767522" />
+    <state x="1065" y="355" key="git4idea.ui.GitTagDialog" timestamp="1581382965619">
+      <screen x="70" y="27" width="1850" height="1053" />
+    </state>
+    <state x="1065" y="355" key="git4idea.ui.GitTagDialog/70.27.1850.1053@70.27.1850.1053" timestamp="1581382965619" />
   </component>
 </project>

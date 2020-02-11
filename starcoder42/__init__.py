@@ -13,7 +13,7 @@ s.find_index: A function that can find the closest corresponding index, even if
 s.describe: A function to describe the contents of a multidimensional array
 """
 
-__version__ = '3.6.1'
+__version__ = '3.7.2'
 __author__ = "Dylan Gatlin"
 
 import sys
