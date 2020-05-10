@@ -20,7 +20,7 @@ import sys
 
 if sys.version_info.major == 3:
     from .funcpy3 import *
-    from starcoder42.physics import *
+    from python.physics import *
 
 from .funcpy import *
 from .constants import *

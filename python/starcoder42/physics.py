@@ -1,8 +1,7 @@
 """Functions that have physical meaning"""
 
 # Local imports
-from starcoder42.constants import *
-from . import ftarcoder42
+from python.constants import *
 
 
 def force_gravity_mag(m1, m2, r):
