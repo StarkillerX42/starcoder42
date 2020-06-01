@@ -1,7 +1,7 @@
 """A number of functions that don't come from physics or astronomy"""
 
 import numpy as np
-from python.physics import planck, estimate_rgb
+from .physics import planck, estimate_rgb
 from importlib import reload
 
 

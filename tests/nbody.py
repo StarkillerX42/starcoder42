@@ -1,5 +1,5 @@
 import unittest
-import starcoder42 as s
+from python import starcoder42 as s
 import numpy as np
 import matplotlib.pyplot as plt
 

@@ -20,11 +20,10 @@ import sys
 
 if sys.version_info.major == 3:
     from .funcpy3 import *
-    from python.physics import *
+    from .physics import *
 
 from .funcpy import *
 from .constants import *
 from .conversions import *
 from .errors import *
 from .plotting import *
-
