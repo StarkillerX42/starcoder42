@@ -1,0 +1,107 @@
+! Intended for f2py as a dependency for starcoder42
+
+python module ftarcoder42
+
+    interface
+        module mathf
+
+            subroutine mag(n, a, a_mag)
+
+                implicit none
+                integer, intent(in) :: n
+                real, intent(in)    :: a(n)
+                real, intent(out)   :: a_mag
+
+            end subroutine mag
+
+            subroutine unit(n, a, a_unit)
+
+                implicit none
+                integer, intent(in) :: n
+                real, intent(in)    :: a(n)
+                real, intent(out)   :: a_unit(n)
+
+            end subroutine unit
+
+            subroutine find_gcd(a, b, gcd)
+
+                implicit none
+                integer, intent(in)     :: a, b
+                integer, intent(out)    :: gcd
+
+            end subroutine find_gcd
+
+
+            subroutine mandelbrot_set(z, c, n, n_iter, z_f)
+
+                implicit none
+                integer, intent(in) :: n, n_iter
+                complex, intent(in), dimension(n, n) :: z, c
+                complex, intent(out), dimension(n, n) :: z_f
+
+            end subroutine mandelbrot_set
+
+
+            subroutine mandelbrot_rate(z, c, n, n_iter, z_f)
+
+                implicit none
+                integer, intent(in) :: n, n_iter
+                complex, intent(in), dimension(n, n) :: z, c
+                complex, intent(out), dimension(n_iter + 1, n, n) :: z_f
+
+            end subroutine mandelbrot_rate
+
+        end module mathf
+
+
+        module physicf
+
+            subroutine gmag(m1, m2, r, force_mag)
+
+                use constants
+                implicit none
+                real, intent(in)    :: m1, m2, r
+                real, intent(out)   :: force_mag
+
+            end subroutine gmag
+
+            subroutine force_gravity(nd, m1, m2, r1, r2, f)
+
+                use mathf
+                implicit none
+                integer, intent(in) :: nd
+                real, intent(in)    :: m1, m2
+                real, intent(in), dimension(nd)  ::  r1, r2
+                real, intent(out) ::  f(nd)
+
+            end subroutine force_gravity
+
+            subroutine net_force(n, nd, masses, positions, forces)
+
+                implicit none
+                integer, intent(in) :: n, nd
+                real, intent(in), dimension(n)      :: masses
+                real, intent(in), dimension(n, nd)   :: positions
+                real, intent(out), dimension(n, nd)  :: forces
+                real, dimension(nd)  :: force
+
+            end subroutine net_force
+
+            subroutine leapfrog(n, nd, ipos, ivel, masses, dt, fpos, fvel)
+
+                implicit none
+                integer, intent(in) :: n, nd
+                real, intent(in), dimension(n, nd)    ::  ipos, ivel
+                real, intent(in), dimension(n)    :: masses
+                real, intent(in)    :: dt
+                real, dimension(n, nd)   :: forces, hvel, accels
+                real, intent(out), dimension(n, nd)   :: fpos, fvel
+
+            end subroutine leapfrog
+
+        end physicf
+
+    end interface
+
+end python module ftarcoder42
+

@@ -14,3 +14,5 @@ tau = 2 * np.pi
 kb = 1.380648e-23
 alphabet = ("ABCDEFHGIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789 `~!"
             "@#$%^&*()-_+={}[]|\\:'\"<,>.?/")
+m_earth = 5.9722e24
+m_sun = 1.989e30

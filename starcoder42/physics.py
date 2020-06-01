@@ -1,7 +1,8 @@
 """Functions that have physical meaning"""
 
 # Local imports
-from .constants import *
+from starcoder42.constants import *
+from . import ftarcoder42
 
 
 def force_gravity_mag(m1, m2, r):
@@ -33,6 +34,64 @@ def force_gravity(m1, m2, r1, r2):
     force_vec = force_mag * unit(ab)
     return force_vec
 
+
+def net_force(masses, positions, algorithm):
+    forces = []
+    for i, pos in enumerate(positions):
+        f = np.zeros(3)
+        for j, posj in enumerate(positions):
+            if i != j:
+                f += algorithm(masses[i], masses[j], pos, posj)
+        forces.append(f)
+    forces = np.array(forces)
+    return forces
+
+
+def leapfrog(masses, ipositions, ivelocities, dt, algorithm):
+    """Computes a leapfrog iteration"""
+
+    iaccels = net_force(masses, ipositions, algorithm)
+    v_half = ivelocities + iaccels * 0.5 * dt
+    fpositions = ipositions + v_half * dt
+    faccels = net_force(masses, fpositions, algorithm)
+    fvelocities = v_half + faccels * 0.5 * dt
+
+    return fpositions, fvelocities
+
+
+def calculate_trajectories(masses, ipositions, ivelocities, t, dt, algorithm):
+    """An n-body simulation calculated using algorithm function.
+
+    Returns:
+        Positions: An array of shape ntimes*nbodies*ndim
+        Velocities: An array of the same shape
+        Times: An array of times of shape ntimes
+    """
+    n_times = int(t/dt)
+    times = np.linspace(0., t, n_times + 1)
+    positions = [ipositions]
+    velocities = [ivelocities]
+
+    for i, time in enumerate(times):
+        pos, vel = leapfrog(masses, positions[i], velocities[i], dt, algorithm)
+        positions.append(pos)
+        velocities.append(vel)
+
+    positions = np.array(positions)
+    velocities = np.array(velocities)
+
+    return positions, velocities, times
+
+
+def calculate_energy(masses, positions, velocities):
+    u_tot = 0.
+    for i, pos in enumerate(positions):
+        for j, posj in enumerate(positions):
+            if i != j:
+                u_tot -= G * masses[i] * masses[j] / mag(pos-posj)
+        u_tot += 0.5 * masses[i] * mag(velocities[i])**2
+
+    return u_tot
 
 def force_electric_mag(q1, q2, r):
     """Calculates the force magnitude between two particles q1 and q2 at a

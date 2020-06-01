@@ -149,17 +149,17 @@ def jacobian(functions, space):
     return jac.simplify()
 
 
-def mag(a):
-    """Computes the symbolic magnitude of a function. Unlike sc.mag, this
-    function should be used in the conjunction of sympy and symbols
-
-    :param a: (array or list) The list to be calculated for magnitude.
-    1D, any length
-    :return: Magnitude of a
-    """
-    a = np.array(a)
-    magnitude = sp.sqrt(np.sum(a ** 2))
-    return magnitude
+# def mag(a):
+#     """Computes the symbolic magnitude of a function. Unlike sc.mag, this
+#     function should be used in the conjunction of sympy and symbols
+#
+#     :param a: (array or list) The list to be calculated for magnitude.
+#     1D, any length
+#     :return: Magnitude of a
+#     """
+#     a = np.array(a)
+#     magnitude = sp.sqrt(np.sum(a ** 2))
+#     return magnitude
 
 
 def find_gcd(a, b):

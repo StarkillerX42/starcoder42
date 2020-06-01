@@ -1,7 +1,7 @@
 class GatlinError(Exception):
     """An error for helping you print handle major issues that don't qualify
     as any of the real errors. I often use this for my own projects which
-    already require starcoder42"""
+    already require python"""
     def __init__(self, message, errors=None):
         super().__init__(message)
         self.errors = errors
@@ -23,5 +23,6 @@ class GatlinError(Exception):
             \   \__, \_     `~'     _/ .__/   /
              `-._,-'   `-._______,-'   `-._,-'
  """)
+
 
 truent = False  # for the memes
