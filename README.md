@@ -17,6 +17,13 @@ s.find_index: A function that can find the closest corresponding index, even if
 s.describe: A function to describe the contents of a multidimensional array
 
 
+## A note on ftarcoder42
+I also wrote ftarcoder42, which is intended to be under starcoder42. In old
+ english, there was a lost character, the 'long s', which looks like an f but
+ is pronounced as an s. Since fortran is almost as old as English, I figured
+ the name would be fitting. It has several routine that are faster than
+ starcoder42, but it's not currently packaged with starcoder42 in a usable way.
+
 ## GNU License
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
