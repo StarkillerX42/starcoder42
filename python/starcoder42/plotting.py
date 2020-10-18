@@ -16,4 +16,3 @@ vgray = (0.733, 0.733, 0.733)
 vibrant = (vblue, vcyan, vteal, vorange, vred, vmagenta,
            vgray)
 lime = (0.386, 0.773, 0.238)
-
