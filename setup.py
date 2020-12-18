@@ -1,19 +1,38 @@
-from setuptools import setup, find_packages
-# from numpy.distutils.core import setup as npsetup
-import python.starcoder42 as s
+import setuptools
+from numpy.distutils.core import setup, Extension
+from pathlib import Path
 
-# npsetup(name='ftarcoder42',
-#         )
+here = Path(__file__).parent.absolute()
+changelog = (here / 'CHANGELOG.md').open('r').read()
+requirements = (here / 'requirements.txt').open('r').readlines()
+version = changelog.split('[')[-1].split(']')[0]
+readme = (here / 'README.md').open('r', encoding='utf-8').read()
+
+
+# ftarcoder42 = Extension('ftarcoder42', [  # 'src/ftarcoder42/ftarcoder42.pyf',
+                                        # 'src/ftarcoder42/constantf.f90',
+                                        # 'src/ftarcoder42/mathf.f90'])
+                                        # 'src/ftarcoder42/physicf.f90'])
+# mathtest = Extension('starcoder42.libfib', ['python/starcoder42/libfib.f90'])
+print(setuptools.find_packages())
 setup(
     name='starcoder42',
-    version=s.__version__,
+    version=version,
+    packages=[''],
     package_dir={'': 'python'},
-    packages=find_packages('python'),
+    # ext_modules=[mathtest],
+    package_data={
+        '': ['*.md']
+    },
+    description='A set of science and astronomy Python tools',
+    long_description=readme,
+    long_description_content_type='text/markdown',
     author='Dylan Gatlin',
     author_email='dgatlin@apo.nmsu.edu',
-    description=open('README.md', 'r').readlines(),
     url='https://github.com/StarkillerX42/starcoder42/',
-    classifiers=['License :: GNU Public License '],
-    requirements=open('requirements.txt', 'r').readlines(),
+    classifiers=['License :: BSD 3-clause'],
+    license='BSD 3-clause',
+    # license_file='LICENSE.md',
+    # requirements=requirements,
     zip_safe=True
 )

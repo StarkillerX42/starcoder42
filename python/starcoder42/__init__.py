@@ -14,11 +14,9 @@ s.describe: A function to describe the contents of a multidimensional array
 """
 
 # __import__('pkg_resources').declare_namespace(__name__)
-__version__ = '3.8.3'
-__author__ = "Dylan Gatlin"
 
 import sys
-
+# import ftarcoder42
 if sys.version_info.major == 3:
     from .funcpy3 import *
     from .physics import *
@@ -28,3 +26,6 @@ from .constants import *
 from .conversions import *
 from .errors import *
 from .plotting import *
+
+__version__ = '3.7.8'
+__author__ = "Dylan Gatlin"
