@@ -18,8 +18,7 @@ print(setuptools.find_packages())
 setup(
     name='starcoder42',
     version=version,
-    packages=[''],
-    package_dir={'': 'python'},
+    packages=setuptools.find_packages(),
     # ext_modules=[mathtest],
     package_data={
         '': ['*.md']
@@ -32,7 +31,7 @@ setup(
     url='https://github.com/StarkillerX42/starcoder42/',
     classifiers=['License :: BSD 3-clause'],
     license='BSD 3-clause',
-    # license_file='LICENSE.md',
-    # requirements=requirements,
+    license_file='LICENSE.md',
+    requirements=requirements,
     zip_safe=True
 )
